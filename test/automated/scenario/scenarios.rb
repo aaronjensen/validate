@@ -1,4 +1,4 @@
-require_relative '../automated_init'
+require_relative "../automated_init"
 
 context "Scenarios" do
   [Validate::Controls::Validate::Scenarios, Validate::Controls::Validator::Scenarios].each do |control|

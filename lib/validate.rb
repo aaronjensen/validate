@@ -1,3 +1,3 @@
-require 'reflect'
+require "reflect"
 
-require 'validate/validate'
+require "validate/validate"

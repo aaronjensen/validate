@@ -1,5 +1,5 @@
-require_relative 'init'
-require 'test_bench'; TestBench.activate
+require_relative "init"
+require "test_bench"; TestBench.activate
 
 # Validators are in an inner module named "Validate"
 # that implements a "call" method that accepts an
@@ -23,7 +23,7 @@ test "Not valid" do
   refute(valid)
 end
 
-e.some_attr = 'something' # some_attr is no longer nil
+e.some_attr = "something" # some_attr is no longer nil
 
 valid = Validate.(e)
 
@@ -50,13 +50,13 @@ class Example2
 
     module SomeValidator
       def self.call(example)
-        example.some_attr == 'something'
+        example.some_attr == "something"
       end
     end
 
     module SomeOtherValidator
       def self.call(example)
-        example.some_attr == 'something else'
+        example.some_attr == "something else"
       end
     end
   end
@@ -64,7 +64,7 @@ end
 
 e = Example2.new
 
-e.some_attr = 'some invalid value'
+e.some_attr = "some invalid value"
 
 valid = Validate.(e, scenario: :some_particular_scenario)
 
@@ -72,7 +72,7 @@ test "Not valid" do
   refute(valid)
 end
 
-e.some_attr = 'something' # some_attr is no longer nil
+e.some_attr = "something" # some_attr is no longer nil
 
 valid = Validate.(e, scenario: :some_particular_scenario)
 
@@ -80,7 +80,7 @@ test "Is valid" do
   assert(valid)
 end
 
-e.some_attr = 'some invalid value'
+e.some_attr = "some invalid value"
 
 valid = Validate.(e, scenario: :some_other_scenario)
 
@@ -88,7 +88,7 @@ test "Not valid" do
   refute(valid)
 end
 
-e.some_attr = 'something else'
+e.some_attr = "something else"
 
 valid = Validate.(e, scenario: :some_other_scenario)
 
@@ -115,20 +115,20 @@ class Example3
 
     module SomeValidator
       def self.call(example)
-        example.some_attr.include?('something')
+        example.some_attr.include?("something")
       end
     end
 
     module SomeOtherValidator
       def self.call(example)
-        example.some_attr.include?('else')
+        example.some_attr.include?("else")
       end
     end
   end
 end
 
 e = Example3.new
-e.some_attr = 'something else' # causes both scenarios to be valid
+e.some_attr = "something else" # causes both scenarios to be valid
 
 valid = Validate.(e, scenarios: [:some_particular_scenario, :some_other_scenario])
 
@@ -136,7 +136,7 @@ test "Is valid" do
   assert(valid)
 end
 
-e.some_attr = 'something and other thing' # causes only the first scenario to be valid
+e.some_attr = "something and other thing" # causes only the first scenario to be valid
 
 valid = Validate.(e, scenarios: [:some_particular_scenario, :some_other_scenario])
 
@@ -144,7 +144,7 @@ test "Not valid" do
   refute(valid)
 end
 
-e.some_attr = 'else other thing' # causes only the second scenario to be valid
+e.some_attr = "else other thing" # causes only the second scenario to be valid
 
 valid = Validate.(e, scenarios: [:some_particular_scenario, :some_other_scenario])
 
@@ -164,7 +164,7 @@ class Example4
 
   module Validate
     def self.call(example, state=[])
-      state << 'All is well'
+      state << "All is well"
       true
     end
 
@@ -178,14 +178,14 @@ class Example4
 
     module SomeScenario
       def self.call(example, state=[])
-        state << 'Oh oh! SomeScenario went wrong'
+        state << "Oh oh! SomeScenario went wrong"
         false
       end
     end
 
     module SomeOtherScenario
       def self.call(example, state=[])
-        state << 'Oh oh! SomeOtherScenario went wrong'
+        state << "Oh oh! SomeOtherScenario went wrong"
         false
       end
     end
@@ -206,8 +206,8 @@ end
 
 test "Validator state is collected" do
   assert(state == [
-    'All is well',
-    'Oh oh! SomeScenario went wrong',
-    'Oh oh! SomeOtherScenario went wrong'
+    "All is well",
+    "Oh oh! SomeScenario went wrong",
+    "Oh oh! SomeOtherScenario went wrong"
   ])
 end

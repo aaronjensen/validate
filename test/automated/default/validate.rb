@@ -1,4 +1,4 @@
-require_relative '../automated_init'
+require_relative "../automated_init"
 
 context "Default Validate" do
   [Validate::Controls::Validate::Default, Validate::Controls::Validator::Default].each do |control|
